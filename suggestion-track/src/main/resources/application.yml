@@ -15,6 +15,8 @@ openweathermap:
       api: "http://api.openweathermap.org/data/2.5/weather"
   api:
     key: "6d657e0dddebaca88e3d77f68db39ee8"
+  units: "metric"
+
 
 eureka:
   instance:

@@ -11,7 +11,8 @@ public class OpenWeatherEspecs {
     @Value("${openweathermap.external.server.api}")
     private String url;
 
-    private String units = "" ;
+    @Value("${openweathermap.units}")
+    private String units;
 
     @Value("${openweathermap.api.key}")
     private String appId;
