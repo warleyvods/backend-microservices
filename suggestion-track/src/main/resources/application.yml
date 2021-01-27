@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: suggestion-track
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+openweathermap:
+  external:
+    server:
+      api: "http://api.openweathermap.org/data/2.5/weather"
+  api:
+    key: "6d657e0dddebaca88e3d77f68db39ee8"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    fetch-registry: true
+    register-with-eureka: true
