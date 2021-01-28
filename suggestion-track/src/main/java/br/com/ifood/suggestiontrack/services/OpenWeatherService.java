@@ -27,77 +27,8 @@ import java.util.Objects;
 /**
  * @author Warley Vinicius
  */
-@Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class OpenWeatherService {
+public interface OpenWeatherService {
 
-    private final OpenWeatherEspecs openWeatherEspecs;
-    private final SpotifySpecs spotifySpecs;
-
-    private final RestTemplate restTemplate;
-
-    public Float getTemperatureByCity(String cidade) {
-        Float temperatura = null;
-
-        try {
-            UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(openWeatherEspecs.getUrl());
-            uriComponentsBuilder.queryParam("q", cidade);
-            uriComponentsBuilder.queryParam("appid", openWeatherEspecs.getAppId());
-            uriComponentsBuilder.queryParam("units", openWeatherEspecs.getUnits());
-
-            OpenWeather OpenWeatherObjMap = restTemplate.getForObject(uriComponentsBuilder.build().toUriString(), OpenWeather.class);
-
-            temperatura = Objects.requireNonNull(OpenWeatherObjMap).getMain().getTemp();
-
-
-            System.out.println(suggestTracksForGenre("POP"));
-
-
-        } catch (HttpClientErrorException ex) {
-            ex.getStackTrace();
-        }
-        return temperatura;
-    }
-
-
-    private String getApiKey() {
-        String encodedToken = new String(Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes()));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, HTTPConstants.BASIC_AUTHORIZATION + encodedToken);
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-        body.add(HTTPConstants.GRANT_TYPE, HTTPConstants.CLIENT_CREDENTIALS);
-
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-
-        String accessToken = restTemplate.exchange(spotifySpecs.getTokenUrl(), HttpMethod.POST, entity, AuthenticationToken.class).getBody().getAccessToken();
-
-        return accessToken;
-    }
-
-
-
-    public Tracks suggestTracksForGenre(String genre) {
-        Tracks tracks = null;
-        try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(spotifySpecs.getUrl());
-            builder.queryParam("seed_genres", genre);
-
-            MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-            headers.add(HttpHeaders.AUTHORIZATION, HTTPConstants.BEARER_AUTHORIZATION + getApiKey());
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-
-            tracks = restTemplate.exchange(builder.build().toUriString(), HttpMethod.GET, entity, Tracks.class).getBody();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tracks;
-    }
-
-
-
+    Float getTemperatureByCity(String city);
 
 }

@@ -14,9 +14,4 @@ public class Tracks {
     @JsonProperty("seeds")
     private List<Seed> seeds = null;
 
-    public List<Track> getTracks() {
-        return tracks;
-    }
-
-
 }

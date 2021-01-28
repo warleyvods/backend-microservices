@@ -13,6 +13,6 @@ public class SpotifySpecs {
 
     private String clientSecret = "ee7e622e704b49cf93aadeae868345fc";
 
-    private String url = "https://api.spotify.com/v1/recommendations";
+    private String urlRecommendation = "https://api.spotify.com/v1/recommendations";
 
 }
