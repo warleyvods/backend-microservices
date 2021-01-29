@@ -26,3 +26,7 @@ eureka:
       defaultZone: http://localhost:8081/eureka
     fetch-registry: true
     register-with-eureka: true
+
+feign:
+  hystrix:
+    enabled: true

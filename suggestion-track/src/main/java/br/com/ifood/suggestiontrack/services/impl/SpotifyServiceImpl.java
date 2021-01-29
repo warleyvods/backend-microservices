@@ -7,6 +7,8 @@ import br.com.ifood.suggestiontrack.models.spotify.Tracks;
 import br.com.ifood.suggestiontrack.properties.spotify.SpotifySpecs;
 import br.com.ifood.suggestiontrack.services.OpenWeatherService;
 import br.com.ifood.suggestiontrack.services.SpotifyService;
+import br.com.ifood.suggestiontrack.webrequests.SpotifyBodyDTO;
+import br.com.ifood.suggestiontrack.webrequests.SpotifyEndpoint;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ public class SpotifyServiceImpl implements SpotifyService {
 
     private final RestTemplate restTemplate;
     private final SpotifySpecs spotifySpecs;
+    private final SpotifyEndpoint spotifyEndpoint;
 
 
     @Override
@@ -69,6 +72,9 @@ public class SpotifyServiceImpl implements SpotifyService {
     private String getApiKey() {
         String tokenBase64 = new String(Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes()));
 
+        System.out.println("BUSCOU NOVO TOKEN");
+//        getApiKeyFeign();
+
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, HTTPConstants.BASIC_AUTHORIZATION + tokenBase64);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -80,6 +86,13 @@ public class SpotifyServiceImpl implements SpotifyService {
 
         return restTemplate.exchange(spotifySpecs.getTokenUrl(), HttpMethod.POST, entity, AuthenticationToken.class).getBody().getAccessToken();
     }
+
+//    private String getApiKeyFeign() {
+//        String tokenBase64 = new String(Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes()));
+//
+//        String tokenSpotify = spotifyEndpoint.getTokenSpotify(tokenBase64);
+//        return tokenSpotify;
+//    }
 
 
 }
