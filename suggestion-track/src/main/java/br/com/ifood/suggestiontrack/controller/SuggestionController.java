@@ -1,11 +1,14 @@
 package br.com.ifood.suggestiontrack.controller;
 
+import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import br.com.ifood.suggestiontrack.models.spotify.mapper.TrackName;
 import br.com.ifood.suggestiontrack.models.spotify.Track;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;
+import br.com.ifood.suggestiontrack.properties.openwheather.OpenWeatherEspecs;
 import br.com.ifood.suggestiontrack.services.OpenWeatherService;
 import br.com.ifood.suggestiontrack.services.SpotifyService;
 import br.com.ifood.suggestiontrack.services.SuggestService;
+import br.com.ifood.suggestiontrack.webrequests.OpenWeatherEndpoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

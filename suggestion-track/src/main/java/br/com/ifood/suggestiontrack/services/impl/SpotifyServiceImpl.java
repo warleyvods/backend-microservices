@@ -26,7 +26,6 @@ public class SpotifyServiceImpl implements SpotifyService {
 
     private final RestTemplate restTemplate;
     private final SpotifySpecs spotifySpecs;
-    private final OpenWeatherService openWeatherService;
 
 
     @Override
@@ -68,10 +67,10 @@ public class SpotifyServiceImpl implements SpotifyService {
     }
 
     private String getApiKey() {
-        String encodedToken = new String(Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes()));
+        String tokenBase64 = new String(Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes()));
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, HTTPConstants.BASIC_AUTHORIZATION + encodedToken);
+        headers.add(HttpHeaders.AUTHORIZATION, HTTPConstants.BASIC_AUTHORIZATION + tokenBase64);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
