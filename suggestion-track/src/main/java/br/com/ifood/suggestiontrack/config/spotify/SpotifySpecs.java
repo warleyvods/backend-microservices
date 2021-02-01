@@ -1,4 +1,4 @@
-package br.com.ifood.suggestiontrack.properties.spotify;
+package br.com.ifood.suggestiontrack.config.spotify;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AuthenticationToken {
+public class OauthTokenResponse {
 
     @JsonProperty("access_token")
     private String accessToken;
@@ -16,10 +16,5 @@ public class AuthenticationToken {
 
     @JsonProperty("expires_in")
     private Integer expiresIn;
-
-    @JsonProperty("scope")
-    private String scope;
-
-
 
 }

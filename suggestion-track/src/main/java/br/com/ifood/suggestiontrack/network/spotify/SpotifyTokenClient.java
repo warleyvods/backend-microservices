@@ -1,0 +1,27 @@
+package br.com.ifood.suggestiontrack.network.spotify;
+
+import br.com.ifood.suggestiontrack.models.spotify.OauthTokenResponse;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+
+
+@FeignClient(name = "spotifyTokenClient", url = "https://accounts.spotify.com/api/token")
+public interface SpotifyTokenClient {
+
+    /**
+     *  <p>
+     *  This method sends a POST using Media Type x-www-form-urlencoded and
+     *  Header Authorization by passing a base64 "token" password to request a valid spotify token.
+     *  </p>
+     * @param grants String with params to spotify required.
+     * @param token String with ClientId and ClientSecret in Base64 encoded.
+     * @return token Bearer Spotify
+     */
+    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    OauthTokenResponse getTokenSpotify(@RequestBody String grants, @RequestHeader(value = HttpHeaders.AUTHORIZATION) String token);
+
+}

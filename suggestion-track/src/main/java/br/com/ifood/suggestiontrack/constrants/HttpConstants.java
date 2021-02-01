@@ -1,8 +1,10 @@
 package br.com.ifood.suggestiontrack.constrants;
 
-public final class HTTPConstants {
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-    private HTTPConstants() {}
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class HttpConstants {
 
     public static final String BASIC_AUTHORIZATION = "Basic ";
     public static final String BEARER_AUTHORIZATION = "Bearer ";

@@ -1,4 +1,4 @@
-package br.com.ifood.suggestiontrack.properties.openwheather;
+package br.com.ifood.suggestiontrack.config.openwheather;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,34 +1,37 @@
 package br.com.ifood.suggestiontrack.services;
 
-import br.com.ifood.suggestiontrack.constrants.HTTPConstants;
-import br.com.ifood.suggestiontrack.models.spotify.AuthenticationToken;
-import br.com.ifood.suggestiontrack.models.spotify.Tracks;
-import br.com.ifood.suggestiontrack.properties.openwheather.OpenWeatherEspecs;
-import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
-import br.com.ifood.suggestiontrack.properties.spotify.SpotifySpecs;
-import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.codec.binary.Base64;
+
+import br.com.ifood.suggestiontrack.config.openwheather.OpenWeatherEspecs;
+import br.com.ifood.suggestiontrack.network.openweather.OpenWeatherClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Objects;
+@Service
+public class OpenWeatherService {
 
-/**
- * @author Warley Vinicius
- */
-public interface OpenWeatherService {
+    private final OpenWeatherEspecs openWeatherEspecs;
+    private final OpenWeatherClient openWeatherClient;
 
-    Float getTemperatureByCity(String city);
+    @Autowired
+    public OpenWeatherService(OpenWeatherEspecs openWeatherEspecs, OpenWeatherClient openWeatherClient) {
+        this.openWeatherEspecs = openWeatherEspecs;
+        this.openWeatherClient = openWeatherClient;
+    }
+
+    /**
+     * This method searches for the city temperature using the Open Weather API
+     * using Spring Cloud Open Feign with Fallback.
+     *
+     * @param city that is researched the temperature.
+     * @return city temperature in Celsius.
+     */
+    @Cacheable("temperatureCity")
+    public Float getTemperatureByCity(String city) {
+
+        return openWeatherClient.getOpenWeather(city, openWeatherEspecs.getAppId(), openWeatherEspecs.getUnits())
+                .getMain().getTemp();
+    }
+
 
 }

@@ -30,3 +30,6 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+
+#logging.level.br.com.ifood.suggestiontrack.webrequests.SpotifyEndpoint: DEBUG
