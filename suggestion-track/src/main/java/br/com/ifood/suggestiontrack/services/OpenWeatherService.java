@@ -24,14 +24,25 @@ public class OpenWeatherService {
      * using Spring Cloud Open Feign with Fallback.
      *
      * @param city that is researched the temperature.
-     * @return city temperature in Celsius.
+     * @return city temperature in a float Celsius.
      */
-    @Cacheable("temperatureCity")
+    @Cacheable("temperatureByCity")
     public Float getTemperatureByCity(String city) {
 
         return openWeatherClient.getOpenWeather(city, openWeatherEspecs.getAppId(), openWeatherEspecs.getUnits())
                 .getMain().getTemp();
     }
 
+    /**
+     * This method serches for the temperature city using geographic coordinates indicated.
+     *
+     * @param lat latitude for the search.
+     * @param lon logitude for the search.
+     * @return temperature of coordinates in a float number Celsius.
+     */
+    @Cacheable("temperatureByCoordinates")
+    public Float getTemperatureByGeographicCoordinates(Double lat, Double lon) {
+        return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherEspecs.getAppId(), openWeatherEspecs.getUnits()).getMain().getTemp();
+    }
 
 }

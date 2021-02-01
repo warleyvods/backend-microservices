@@ -19,5 +19,4 @@ public class UtilConfigs {
         return Logger.Level.FULL;
     }
 
-
 }

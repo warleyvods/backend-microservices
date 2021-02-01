@@ -21,7 +21,7 @@ public interface SpotifyRecommendationClient {
      * Method to suggest music based on genre indicated by temperature city search.
      *
      * @param seedGenres required param to spotify (Ex: "pop" mandatory lowercase)
-     * @param oAuth String token to send in Header request
+     * @param oAuth      String token to send in Header request
      * @return object Tracks with 20 name musics based on genre.
      */
     @GetMapping
@@ -31,6 +31,13 @@ public interface SpotifyRecommendationClient {
     @Component
     class SpotifyRecommendationClientFallback implements SpotifyRecommendationClient {
 
+        /**
+         * Fallback method when api return error or high latency
+         *
+         * @param seedGenres required param to spotify (Ex: "pop" mandatory lowercase)
+         * @param oAuth      String token to send in Header request
+         * @return object Tracks with 20 name music "STATICS" based on random with default.
+         */
         @Override
         public Tracks suggestMusicForGenre(String seedGenres, String oAuth) {
 

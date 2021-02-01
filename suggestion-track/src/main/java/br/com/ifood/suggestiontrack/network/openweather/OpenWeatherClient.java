@@ -2,6 +2,7 @@ package br.com.ifood.suggestiontrack.network.openweather;
 
 import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,9 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 
-@Primary
+
 @FeignClient(name = "openWeatherClient", url = "${openweathermap.external.server.api}",
-        fallback = OpenWeatherClient.OpenWeatherClientFallback.class)
+        fallback = OpenWeatherClient.OpenWeatherClientFallback.class, primary = true)
 public interface OpenWeatherClient {
 
     /**
@@ -25,13 +26,29 @@ public interface OpenWeatherClient {
      * @param appId token for search in Open Weather API.
      * @param units units for parameter, use "metric" for (International System Of Units = Cº)
      *              or do not use nothing for default in Fº.
-     *
      * @return object OpenWeather with filled parameters by OpenWeatherApi.
      */
     @GetMapping
     OpenWeather getOpenWeather(@RequestParam(value = "q") String city,
                                @RequestParam(value = "appid") String appId,
                                @RequestParam(value = "units") String units);
+
+    /**
+     * This method uses Spring Cloud Open Feign to return an object OpenWeather filled with the temperature based on
+     * geographic coordinates.
+     *
+     * @param lon   longitude for search
+     * @param lat   latitude for search
+     * @param appId token for search in Open Weather API.
+     * @param units units for parameter, use "metric" for (International System Of Units = ºC)
+     *              or do not use nothing for default in ºF.
+     * @return a random float number in class "Main" intro OpenWeather class number between 5ºC or 31ºC
+     */
+    @GetMapping
+    OpenWeather getOpenWeatherByCoordinates(@RequestParam(value = "lon") Double lon,
+                                            @RequestParam(value = "lat") Double lat,
+                                            @RequestParam(value = "appid") String appId,
+                                            @RequestParam(value = "units") String units);
 
     @Slf4j
     @Component
@@ -47,7 +64,6 @@ public interface OpenWeatherClient {
          * @param appId token for search in Open Weather API.
          * @param units units for parameter, use "metric" for (International System Of Units = ºC)
          *              or do not use nothing for default in ºF.
-         *
          * @return a random float number in class "Main" intro OpenWeather class number between 5ºC or 31ºC
          */
         @Override
@@ -60,7 +76,36 @@ public interface OpenWeatherClient {
             float randomTemp = RANDOM.nextFloat() * (max - min) + min;
 
             OpenWeather.Main main = new OpenWeather.Main();
-            main.setTemp(Float.parseFloat(new DecimalFormat("##.##").format(randomTemp)));
+            main.setTemp(randomTemp);
+
+            OpenWeather openWeather = new OpenWeather();
+            openWeather.setMain(main);
+
+            return openWeather;
+        }
+
+        /**
+         * Callback method for create a random float number to prevent the api from stopping,
+         * releasing the spotify suggestion api to do its job.
+         *
+         * @param lon   longitude for search
+         * @param lat   latitude for search
+         * @param appId token for search in Open Weather API.
+         * @param units units for parameter, use "metric" for (International System Of Units = ºC)
+         *              or do not use nothing for default in ºF.
+         * @return a random float number in class "Main" intro OpenWeather class number between 5ºC or 31ºC
+         */
+        @Override
+        public OpenWeather getOpenWeatherByCoordinates(Double lon, Double lat, String appId, String units) {
+            log.debug("getOpenWeather in fallback!");
+
+            float min = 5;
+            float max = 31;
+
+            float randomTemp = RANDOM.nextFloat() * (max - min) + min;
+
+            OpenWeather.Main main = new OpenWeather.Main();
+            main.setTemp(randomTemp);
 
             OpenWeather openWeather = new OpenWeather();
             openWeather.setMain(main);

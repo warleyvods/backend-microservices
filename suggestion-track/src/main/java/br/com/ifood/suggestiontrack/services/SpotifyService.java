@@ -1,7 +1,7 @@
 package br.com.ifood.suggestiontrack.services;
 
 import br.com.ifood.suggestiontrack.config.spotify.SpotifySpecs;
-import br.com.ifood.suggestiontrack.constrants.HttpConstants;
+import br.com.ifood.suggestiontrack.constrants.HttpConfig;
 import br.com.ifood.suggestiontrack.enums.GenreMusic;
 import br.com.ifood.suggestiontrack.models.spotify.OauthTokenResponse;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;
@@ -33,7 +33,7 @@ public class SpotifyService {
      * @return object tracks filled.
      */
     public Tracks suggerMusicForGenre(GenreMusic genre) {
-        String oAuth = HttpConstants.BEARER_AUTHORIZATION + getApiKeyFeign().getAccessToken();
+        String oAuth = HttpConfig.BEARER_AUTH + getApiKeyFeign().getAccessToken();
 
         return spotifyRecommendationClient.suggestMusicForGenre(genre.toString(), oAuth);
     }
@@ -60,13 +60,12 @@ public class SpotifyService {
         return genreMusic;
     }
 
-
     private OauthTokenResponse getApiKeyFeign() {
         byte[] bytesEncoded = Base64.encodeBase64((spotifySpecs.getClientId() + ":" + spotifySpecs.getClientSecret()).getBytes());
         String tokenBase64 = new String(bytesEncoded);
 
-        return spotifyTokenClient.getTokenSpotify(HttpConstants.GRANT_TYPE + "=" + HttpConstants.CLIENT_CREDENTIALS ,
-                HttpConstants.BASIC_AUTHORIZATION +  tokenBase64);
+        return spotifyTokenClient.getTokenSpotify(HttpConfig.TYPE + "=" + HttpConfig.CLIENT,
+                HttpConfig.BASIC_AUTH + tokenBase64);
     }
 
 }

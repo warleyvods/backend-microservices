@@ -5,11 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = false)
 public class OpenWeather {
 
     @JsonProperty("main")
     private Main main;
+
+    @JsonProperty("name")
+    private String name;
+
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
