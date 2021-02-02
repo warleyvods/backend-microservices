@@ -2,19 +2,15 @@ package br.com.ifood.suggestiontrack.network.openweather;
 
 import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
-
-
-@FeignClient(name = "openWeatherClient", url = "${openweathermap.external.server.api}",
+//TODO
+@FeignClient(name = "openWeatherClient", url = "http://api.openweathermap.org/data/2.5/weather",
         fallback = OpenWeatherClient.OpenWeatherClientFallback.class, primary = true)
 public interface OpenWeatherClient {
 

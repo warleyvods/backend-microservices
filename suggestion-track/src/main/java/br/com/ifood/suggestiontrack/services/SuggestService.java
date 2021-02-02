@@ -50,6 +50,12 @@ public class SuggestService {
         return trackName;
     }
 
+    /**
+     *
+     * @param latitude
+     * @param longitude
+     * @return
+     */
     public TrackName suggestMusicByCoodinates(double latitude, double longitude) {
 
         Float temperature = openWeatherService.getTemperatureByGeographicCoordinates(latitude, longitude);

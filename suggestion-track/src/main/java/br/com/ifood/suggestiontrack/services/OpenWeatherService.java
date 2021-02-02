@@ -1,21 +1,19 @@
 package br.com.ifood.suggestiontrack.services;
 
 
-import br.com.ifood.suggestiontrack.config.openwheather.OpenWeatherEspecs;
+import br.com.ifood.suggestiontrack.config.openwheather.OpenWeatherConfig;
 import br.com.ifood.suggestiontrack.network.openweather.OpenWeatherClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OpenWeatherService {
 
-    private final OpenWeatherEspecs openWeatherEspecs;
+    private final OpenWeatherConfig openWeatherConfig;
     private final OpenWeatherClient openWeatherClient;
 
-    @Autowired
-    public OpenWeatherService(OpenWeatherEspecs openWeatherEspecs, OpenWeatherClient openWeatherClient) {
-        this.openWeatherEspecs = openWeatherEspecs;
+    public OpenWeatherService(OpenWeatherConfig openWeatherConfig, OpenWeatherClient openWeatherClient) {
+        this.openWeatherConfig = openWeatherConfig;
         this.openWeatherClient = openWeatherClient;
     }
 
@@ -29,7 +27,7 @@ public class OpenWeatherService {
     @Cacheable("temperatureByCity")
     public Float getTemperatureByCity(String city) {
 
-        return openWeatherClient.getOpenWeather(city, openWeatherEspecs.getAppId(), openWeatherEspecs.getUnits())
+        return openWeatherClient.getOpenWeather(city, openWeatherConfig.getAppId(), openWeatherConfig.getUnits())
                 .getMain().getTemp();
     }
 
@@ -42,7 +40,7 @@ public class OpenWeatherService {
      */
     @Cacheable("temperatureByCoordinates")
     public Float getTemperatureByGeographicCoordinates(Double lat, Double lon) {
-        return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherEspecs.getAppId(), openWeatherEspecs.getUnits()).getMain().getTemp();
+        return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherConfig.getAppId(), openWeatherConfig.getUnits()).getMain().getTemp();
     }
 
 }

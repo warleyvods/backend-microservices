@@ -5,32 +5,27 @@ import br.com.ifood.suggestiontrack.services.SuggestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  */
 @RestController
-@RequestMapping("/")
 public class SuggestionController {
 
     private final SuggestService suggestService;
 
-    @Autowired
     public SuggestionController(SuggestService suggestService) {
         this.suggestService = suggestService;
     }
 
     /**
      *
-     * @param city
-     * @return
+     * @param city city for the search
+     * @return TrackName object with status code 200
      */
-    @GetMapping("/city")
-    public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@RequestParam String city) {
+    @GetMapping("/{city}")
+    public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@PathVariable String city) {
         TrackName trackName = suggestService.suggestMusicByTemperatureCity(city);
         return new ResponseEntity<>(trackName, HttpStatus.OK);
     }

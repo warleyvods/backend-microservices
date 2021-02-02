@@ -31,7 +31,6 @@ public interface SpotifyTokenClient {
     @Component
     class SpotifyTokenClientFallback implements SpotifyTokenClient {
 
-
         /**
          * Fallback token
          *

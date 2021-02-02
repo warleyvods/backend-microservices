@@ -42,25 +42,25 @@ public interface SpotifyRecommendationClient {
         public Tracks suggestMusicForGenre(String seedGenres, String oAuth) {
 
             ArrayList<Track> track = new ArrayList<>();
-            track.add(new Track("Musica 1"));
-            track.add(new Track("Musica 2"));
-            track.add(new Track("Musica 3"));
-            track.add(new Track("Musica 4"));
-            track.add(new Track("Musica 5"));
-            track.add(new Track("Musica 6"));
-            track.add(new Track("Musica 7"));
-            track.add(new Track("Musica 8"));
-            track.add(new Track("Musica 9"));
-            track.add(new Track("Musica 11"));
-            track.add(new Track("Musica 12"));
-            track.add(new Track("Musica 13"));
-            track.add(new Track("Musica 14"));
-            track.add(new Track("Musica 15"));
-            track.add(new Track("Musica 16"));
-            track.add(new Track("Musica 17"));
-            track.add(new Track("Musica 18"));
-            track.add(new Track("Musica 19"));
-            track.add(new Track("Musica 20"));
+            track.add(new Track("Don't Let Me Down (feat. Daya)"));
+            track.add(new Track("Havana (feat. Young Thug)"));
+            track.add(new Track("Walk It Talk It"));
+            track.add(new Track("Let Her Go"));
+            track.add(new Track("Burn"));
+            track.add(new Track("Sucker for Pain (with Wiz Khalifa, Imagine Dragons, Logic & Ty Dolla $ign feat. X Ambassadors)"));
+            track.add(new Track("Mask Off"));
+            track.add(new Track("Sex"));
+            track.add(new Track("In My Mind"));
+            track.add(new Track("All Time Low"));
+            track.add(new Track("Elastic Heart"));
+            track.add(new Track("Super Far"));
+            track.add(new Track("All The Time"));
+            track.add(new Track("Ain't It Fun"));
+            track.add(new Track("Whatever You Need (feat. Chris Brown & Ty Dolla $ign)"));
+            track.add(new Track("Crush"));
+            track.add(new Track("goosebumps"));
+            track.add(new Track("Please Don't Go"));
+            track.add(new Track("Applause"));
 
             Tracks tracks = new Tracks();
             tracks.setTracksMusic(track);

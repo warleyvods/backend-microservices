@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: suggestion-track
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  cloud:
+    config:
+      uri: 'http://localhost:8083'
+      enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+feign:
+  hystrix:
+    enabled: true

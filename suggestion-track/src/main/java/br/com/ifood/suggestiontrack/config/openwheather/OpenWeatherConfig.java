@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class OpenWeatherEspecs {
+public class OpenWeatherConfig {
 
-    @Value("${openweathermap.external.server.api}")
+    @Value("${external.openWeather.url}")
     private String url;
 
-    @Value("${openweathermap.units}")
+    @Value("${external.openWeather.units}")
     private String units;
 
-    @Value("${openweathermap.api.key}")
+    @Value("${external.openWeather.appId}")
     private String appId;
 
 }
