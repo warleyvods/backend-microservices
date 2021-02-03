@@ -1,18 +1,23 @@
 package br.com.ifood.suggestiontrack.config.spotify;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Data
 @Component
 public class SpotifySpecs {
 
-    private String tokenUrl = "https://accounts.spotify.com/api/token";
+    @Value("${external.spotify.url.token}")
+    private String tokenUrl;
 
-    private String clientId = "3aa7f52de8dc4411b30ffd1663b3a0ec";
+    @Value("${external.spotify.client.clientId}")
+    private String clientId;
 
-    private String clientSecret = "ee7e622e704b49cf93aadeae868345fc";
+    @Value("${external.spotify.client.clientSecret}")
+    private String clientSecret;
 
-    private String urlRecommendation = "https://api.spotify.com/v1/recommendations";
+    @Value(("${external.spotify.url.recommendation}"))
+    private String urlRecommendation;
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Random;
 
 //TODO
-@FeignClient(name = "openWeatherClient", url = "http://api.openweathermap.org/data/2.5/weather",
+@FeignClient(name = "openWeatherClient", url = "${external.openWeather.url}",
         fallback = OpenWeatherClient.OpenWeatherClientFallback.class, primary = true)
 public interface OpenWeatherClient {
 

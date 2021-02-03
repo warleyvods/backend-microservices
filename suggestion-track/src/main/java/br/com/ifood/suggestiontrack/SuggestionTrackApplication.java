@@ -16,5 +16,4 @@ public class SuggestionTrackApplication {
         SpringApplication.run(SuggestionTrackApplication.class, args);
     }
 
-
 }

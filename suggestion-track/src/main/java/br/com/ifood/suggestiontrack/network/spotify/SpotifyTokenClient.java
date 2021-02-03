@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @Primary
-@FeignClient(name = "spotifyTokenClient", url = "https://accounts.spotify.com/api/token", fallback = SpotifyTokenClient.SpotifyTokenClientFallback.class)
+@FeignClient(name = "spotifyTokenClient", url = "${external.spotify.url.token}", fallback = SpotifyTokenClient.SpotifyTokenClientFallback.class)
 public interface SpotifyTokenClient {
 
     /**

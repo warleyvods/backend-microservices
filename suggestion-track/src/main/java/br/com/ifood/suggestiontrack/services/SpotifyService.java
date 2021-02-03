@@ -18,7 +18,6 @@ public class SpotifyService {
     private final SpotifyTokenClient spotifyTokenClient;
     private final SpotifyRecommendationClient spotifyRecommendationClient;
 
-    @Autowired
     public SpotifyService(SpotifySpecs spotifySpecs, SpotifyTokenClient spotifyTokenClient, SpotifyRecommendationClient spotifyRecommendationClient) {
         this.spotifySpecs = spotifySpecs;
         this.spotifyTokenClient = spotifyTokenClient;

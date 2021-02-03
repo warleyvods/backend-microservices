@@ -15,6 +15,9 @@ public class OpenWeather {
     private String name;
 
 
+    /**
+     * Inner class for the Main object in OpenWeather
+     */
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Main {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 
 @Primary
-@FeignClient(name = "spotifyRecommendationClient", url = "https://api.spotify.com/v1/recommendations",
+@FeignClient(name = "spotifyRecommendationClient", url = "${external.spotify.url.recommendation}",
         fallback = SpotifyRecommendationClient.SpotifyRecommendationClientFallback.class)
 public interface SpotifyRecommendationClient {
 

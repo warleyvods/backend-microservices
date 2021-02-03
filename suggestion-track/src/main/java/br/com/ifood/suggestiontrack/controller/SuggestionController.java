@@ -2,13 +2,15 @@ package br.com.ifood.suggestiontrack.controller;
 
 import br.com.ifood.suggestiontrack.models.spotify.mapper.TrackName;
 import br.com.ifood.suggestiontrack.services.SuggestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Suggestion Tracks Endpoints
  */
 @RestController
 public class SuggestionController {

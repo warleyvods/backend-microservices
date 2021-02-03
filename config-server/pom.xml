@@ -15,19 +15,11 @@
     <name>config-server</name>
     <description>Spring Cloud Config Server</description>
 
-    <properties>
-        <java.version>11</java.version>
-    </properties>
-
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-
-
-
     </dependencies>
 
     <dependencyManagement>
