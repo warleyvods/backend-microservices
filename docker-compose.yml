@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+  config-server:
+    container_name: config-server
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    ports:
+      - '8083:8083'
+    networks:
+      - devnet
+    depends_on:
+      - discovery
+    links:
+      - discovery
+    restart: on-failure
+
+  discovery:
+    container_name: discovery-server
+    build:
+      context: ./discovery-server
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'
+    networks:
+      - devnet
+
+  gateway:
+    container_name: gateway-server
+    build:
+      context: ./gateway-server
+      dockerfile: Dockerfile
+    ports:
+    - '8080:8080'
+    networks:
+      - devnet
+    depends_on:
+      - discovery
+    links:
+      - discovery
+    restart: on-failure
+
+  suggestion-track:
+    container_name: suggestion-track-server
+    build:
+      context: ./suggestion-track
+      dockerfile: Dockerfile
+    ports:
+    - '8082:8082'
+    networks:
+      - devnet
+    depends_on:
+      - discovery
+      - config-server
+      - gateway
+    links:
+      - config-server
+      - discovery
+      - gateway
+    restart: on-failure
+
+networks:
+  devnet:
+    driver: bridge

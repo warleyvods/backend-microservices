@@ -10,7 +10,7 @@ spring:
       ddl-auto: update
   cloud:
     config:
-      uri: 'http://localhost:8083'
+      uri: '${SPRING_CLOUD_CONFIG:http://localhost:8083}'
       enabled: true
 
 eureka:
@@ -18,7 +18,7 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://localhost:8081/eureka
+      defaultZone: '${EUREKA_ENV_NET:http://localhost:8081}/eureka'
     fetch-registry: true
     register-with-eureka: true
 
