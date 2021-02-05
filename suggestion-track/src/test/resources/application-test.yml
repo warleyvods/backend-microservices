@@ -1,0 +1,13 @@
+external:
+  openWeather:
+    url: 'http://api.openweathermap.org/data/2.5/weather'
+    appId: '6d657e0dddebaca88e3d77f68db39ee8'
+    units: 'metric'
+
+  spotify:
+    client:
+      clientId: '3aa7f52de8dc4411b30ffd1663b3a0ec'
+      clientSecret: 'ee7e622e704b49cf93aadeae868345fc'
+    url:
+      recommendation: 'https://api.spotify.com/v1/recommendations'
+      token: 'https://accounts.spotify.com/api/token'

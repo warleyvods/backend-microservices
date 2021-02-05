@@ -26,8 +26,8 @@ public class SuggestionController {
      * @param city city for the search
      * @return TrackName object with status code 200
      */
-    @GetMapping("/{city}")
-    public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@PathVariable String city) {
+    @GetMapping("/city")
+    public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@RequestParam String city) {
         TrackName trackName = suggestService.suggestMusicByTemperatureCity(city);
         return new ResponseEntity<>(trackName, HttpStatus.OK);
     }

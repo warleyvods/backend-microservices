@@ -3,15 +3,15 @@ package br.com.ifood.suggestiontrack.network.openweather;
 import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Random;
 
-//TODO
-@FeignClient(name = "openWeatherClient", url = "${external.openWeather.url}",
-        fallback = OpenWeatherClient.OpenWeatherClientFallback.class, primary = true)
+@Primary
+@FeignClient(name = "openWeatherClient", url = "${external.openWeather.url}", fallback = OpenWeatherClient.OpenWeatherClientFallback.class)
 public interface OpenWeatherClient {
 
     /**
@@ -64,20 +64,7 @@ public interface OpenWeatherClient {
          */
         @Override
         public OpenWeather getOpenWeather(String city, String appId, String units) {
-            log.debug("getOpenWeather in fallback!");
-
-            float min = 5;
-            float max = 31;
-
-            float randomTemp = RANDOM.nextFloat() * (max - min) + min;
-
-            OpenWeather.Main main = new OpenWeather.Main();
-            main.setTemp(randomTemp);
-
-            OpenWeather openWeather = new OpenWeather();
-            openWeather.setMain(main);
-
-            return openWeather;
+            return getOpenWeather();
         }
 
         /**
@@ -93,6 +80,10 @@ public interface OpenWeatherClient {
          */
         @Override
         public OpenWeather getOpenWeatherByCoordinates(Double lon, Double lat, String appId, String units) {
+            return getOpenWeather();
+        }
+
+        private OpenWeather getOpenWeather() {
             log.debug("getOpenWeather in fallback!");
 
             float min = 5;
