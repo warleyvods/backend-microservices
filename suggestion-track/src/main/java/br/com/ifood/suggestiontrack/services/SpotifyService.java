@@ -1,7 +1,7 @@
 package br.com.ifood.suggestiontrack.services;
 
 import br.com.ifood.suggestiontrack.config.spotify.SpotifySpecs;
-import br.com.ifood.suggestiontrack.constrants.HttpConfig;
+import br.com.ifood.suggestiontrack.config.HttpConfig;
 import br.com.ifood.suggestiontrack.enums.GenreMusic;
 import br.com.ifood.suggestiontrack.models.spotify.OauthTokenResponse;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;

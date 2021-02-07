@@ -4,6 +4,11 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class loads the variables responsible for configuring the api call for the Spotify
+ * using Spring Cloud Config.
+ * @author Warley Vinicius
+ */
 @Data
 @Component
 public class SpotifySpecs {

@@ -4,6 +4,11 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class loads the variables responsible for configuring the api call Open Weather
+ * using Spring Cloud Config.
+ * @author Warley Vinicius
+ */
 @Getter
 @Component
 public class OpenWeatherConfig {

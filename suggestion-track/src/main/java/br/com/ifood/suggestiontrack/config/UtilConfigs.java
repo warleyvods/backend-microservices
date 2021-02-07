@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Custom config class configuration beans
+ * @author Warley Vinicius
+ */
 @Component
 public class UtilConfigs {
 

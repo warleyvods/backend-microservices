@@ -16,6 +16,13 @@
     <description>Spring Boot Micro-service Suggestion Track</description>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock</artifactId>

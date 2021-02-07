@@ -1,8 +1,11 @@
-package br.com.ifood.suggestiontrack.constrants;
+package br.com.ifood.suggestiontrack.config;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Constraints for the Spotify POST
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HttpConfig {
 

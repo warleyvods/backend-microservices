@@ -77,7 +77,11 @@ public class SuggestService {
             Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
 
             trackNameResponse(trackName, openWeatherResponse.getMain().getTemp(), genreMusic, tracks);
-            trackName.setCity(openWeatherResponse.getName());
+            if (openWeatherResponse.getName().isEmpty()) {
+                trackName.setCity("This coordinates not a have a city!");
+            } else {
+                trackName.setCity(openWeatherResponse.getName());
+            }
 
         } catch (RuntimeException runtimeEx) {
             throw new CoordinateWrongException("Wrong value for Coordinates!");

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
 /**
  * Suggestion Tracks Endpoints
  */
@@ -24,8 +22,10 @@ public class SuggestionController {
     }
 
     /**
+     * This method is responsible for searching for a list of songs referring to the temperature of the city
+     *
      * @param city city for the search
-     * @return TrackName object with status code 200
+     * @return TrackName object with status code 200 or 404 for city not found.
      */
     @GetMapping("/city")
     public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@RequestParam  String city) {
@@ -34,9 +34,12 @@ public class SuggestionController {
     }
 
     /**
-     * @param lat
-     * @param lon
-     * @return
+     * This method is responsible for searching for a list of songs related to the temperature
+     * sought based on the latitude and longitude informed
+     *
+     * @param lat Latitude for the search. Minimum range (-90º) Maximum range (+90º)
+     * @param lon Longitude for the search. Minimum range (-180) Maximum range (+180º)
+     * @return TrackName object with status code 200 or 400 for bad requests.
      */
     @GetMapping("/coordinates")
     public ResponseEntity<TrackName> getSuggestMusicsByCoordinates(@RequestParam Double lat, @RequestParam Double lon) {
