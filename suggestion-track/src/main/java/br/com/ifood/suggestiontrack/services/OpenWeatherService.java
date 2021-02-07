@@ -2,6 +2,7 @@ package br.com.ifood.suggestiontrack.services;
 
 
 import br.com.ifood.suggestiontrack.config.openwheather.OpenWeatherConfig;
+import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import br.com.ifood.suggestiontrack.network.openweather.OpenWeatherClient;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,9 @@ public class OpenWeatherService {
      * @param city that is researched the temperature.
      * @return city temperature in a float Celsius.
      */
-    @Cacheable("temperatureByCity")
-    public Float getTemperatureByCity(String city) {
-
-        return openWeatherClient.getOpenWeather(city, openWeatherConfig.getAppId(), openWeatherConfig.getUnits())
-                .getMain().getTemp();
+//    @Cacheable("temperatureByCity")
+    public OpenWeather getTemperatureByCity(String city) {
+        return openWeatherClient.getOpenWeather(city, openWeatherConfig.getAppId(), openWeatherConfig.getUnits());
     }
 
     /**
@@ -38,9 +37,9 @@ public class OpenWeatherService {
      * @param lon logitude for the search.
      * @return temperature of coordinates in a float number Celsius.
      */
-    @Cacheable("temperatureByCoordinates")
-    public Float getTemperatureByGeographicCoordinates(Double lat, Double lon) {
-        return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherConfig.getAppId(), openWeatherConfig.getUnits()).getMain().getTemp();
+//    @Cacheable("temperatureByCoordinates")
+    public OpenWeather getTemperatureByGeographicCoordinates(Double lat, Double lon) {
+        return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherConfig.getAppId(), openWeatherConfig.getUnits());
     }
 
 }

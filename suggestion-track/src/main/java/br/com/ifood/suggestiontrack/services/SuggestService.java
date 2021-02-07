@@ -1,16 +1,19 @@
 package br.com.ifood.suggestiontrack.services;
 
 import br.com.ifood.suggestiontrack.enums.GenreMusic;
+import br.com.ifood.suggestiontrack.error.CityNotFoundException;
+import br.com.ifood.suggestiontrack.error.CoordinateWrongException;
+import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
 import br.com.ifood.suggestiontrack.models.spotify.Track;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;
 import br.com.ifood.suggestiontrack.models.spotify.mapper.TrackName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Service
 public class SuggestService {
 
     private final SpotifyService spotifyService;
@@ -30,50 +33,57 @@ public class SuggestService {
      * @return object Tracks filled.
      */
     public TrackName suggestMusicByTemperatureCity(String city) {
+        TrackName trackName = new TrackName();
 
-        Float temperature = openWeatherService.getTemperatureByCity(city);
-        GenreMusic genreMusic = spotifyService.obtainMusicalGenre(temperature);
-        Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
+        try {
+            OpenWeather openWeatherResponse = openWeatherService.getTemperatureByCity(city);
+            GenreMusic genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
+            Tracks tracks = spotifyService.suggerMusicForGenre(spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp()));
 
+            trackNameResponse(trackName, openWeatherResponse.getMain().getTemp(), genreMusic, tracks);
+            trackName.setCity(openWeatherResponse.getName());
+
+        } catch (RuntimeException runtimeEx) {
+            throw new CityNotFoundException("City not found!");
+        }
+
+        return trackName;
+    }
+
+    private void trackNameResponse(TrackName trackName, Float temperature, GenreMusic genreMusic, Tracks tracks) {
         List<String> namesMusic = new ArrayList<>();
 
         for (Track track : tracks.getTracksMusic()) {
             namesMusic.add(track.getName());
         }
 
-        TrackName trackName = new TrackName();
         trackName.setTemperature(temperature);
         trackName.setGenre(genreMusic);
         trackName.setName(namesMusic);
-        trackName.setCity(city);
-
-        return trackName;
     }
 
     /**
      *
-     * @param latitude
-     * @param longitude
+     * @param latitude latitude min -90 max +90 degrees
+     * @param longitude longitude min -180 max +180 degrees
      * @return
+     * @throws CoordinateWrongException if range are invalid.
      */
-    public TrackName suggestMusicByCoodinates(double latitude, double longitude) {
+    public TrackName suggestMusicByCoordinates(double latitude, double longitude) {
+        TrackName trackName = new TrackName();
+        try {
+            OpenWeather openWeatherResponse = openWeatherService.getTemperatureByGeographicCoordinates(latitude, longitude);
+            GenreMusic genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
+            Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
 
-        Float temperature = openWeatherService.getTemperatureByGeographicCoordinates(latitude, longitude);
-        GenreMusic genreMusic = spotifyService.obtainMusicalGenre(temperature);
-        Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
+            trackNameResponse(trackName, openWeatherResponse.getMain().getTemp(), genreMusic, tracks);
+            trackName.setCity(openWeatherResponse.getName());
 
-        List<String> namesMusic = new ArrayList<>();
-
-        for (Track track : tracks.getTracksMusic()) {
-            namesMusic.add(track.getName());
+        } catch (RuntimeException runtimeEx) {
+            throw new CoordinateWrongException("Wrong value for Coordinates!");
         }
 
-        TrackName trackName = new TrackName();
-        trackName.setTemperature(temperature);
-        trackName.setGenre(genreMusic);
-        trackName.setName(namesMusic);
         return trackName;
     }
-
 
 }

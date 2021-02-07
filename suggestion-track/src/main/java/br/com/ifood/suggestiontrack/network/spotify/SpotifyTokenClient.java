@@ -41,7 +41,7 @@ public interface SpotifyTokenClient {
         @Override
         public OauthTokenResponse getTokenSpotify(String grants, String token) {
             OauthTokenResponse tokenFallback = new OauthTokenResponse();
-            tokenFallback.setAccessToken("STRING");
+            tokenFallback.setAccessToken("Jwt-token-mock");
             return tokenFallback;
         }
     }

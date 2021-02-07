@@ -8,7 +8,6 @@ import br.com.ifood.suggestiontrack.models.spotify.Tracks;
 import br.com.ifood.suggestiontrack.network.spotify.SpotifyRecommendationClient;
 import br.com.ifood.suggestiontrack.network.spotify.SpotifyTokenClient;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
