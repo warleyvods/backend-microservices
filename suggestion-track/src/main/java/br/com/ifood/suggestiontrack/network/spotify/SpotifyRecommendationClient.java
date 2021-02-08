@@ -1,6 +1,6 @@
 package br.com.ifood.suggestiontrack.network.spotify;
 
-import br.com.ifood.suggestiontrack.models.spotify.Track;
+import br.com.ifood.suggestiontrack.models.spotify.Music;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
@@ -41,29 +41,29 @@ public interface SpotifyRecommendationClient {
         @Override
         public Tracks suggestMusicForGenre(String seedGenres, String oAuth) {
 
-            ArrayList<Track> track = new ArrayList<>();
-            track.add(new Track("Don't Let Me Down (feat. Daya)"));
-            track.add(new Track("Havana (feat. Young Thug)"));
-            track.add(new Track("Walk It Talk It"));
-            track.add(new Track("Let Her Go"));
-            track.add(new Track("Burn"));
-            track.add(new Track("Sucker for Pain (with Wiz Khalifa, Imagine Dragons, Logic & Ty Dolla $ign feat. X Ambassadors)"));
-            track.add(new Track("Mask Off"));
-            track.add(new Track("Sex"));
-            track.add(new Track("In My Mind"));
-            track.add(new Track("All Time Low"));
-            track.add(new Track("Elastic Heart"));
-            track.add(new Track("Super Far"));
-            track.add(new Track("All The Time"));
-            track.add(new Track("Ain't It Fun"));
-            track.add(new Track("Whatever You Need (feat. Chris Brown & Ty Dolla $ign)"));
-            track.add(new Track("Crush"));
-            track.add(new Track("goosebumps"));
-            track.add(new Track("Please Don't Go"));
-            track.add(new Track("Applause"));
+            ArrayList<Music> music = new ArrayList<>();
+            music.add(new Music("Don't Let Me Down (feat. Daya)"));
+            music.add(new Music("Havana (feat. Young Thug)"));
+            music.add(new Music("Walk It Talk It"));
+            music.add(new Music("Let Her Go"));
+            music.add(new Music("Burn"));
+            music.add(new Music("Sucker for Pain (with Wiz Khalifa, Imagine Dragons, Logic & Ty Dolla $ign feat. X Ambassadors)"));
+            music.add(new Music("Mask Off"));
+            music.add(new Music("Sex"));
+            music.add(new Music("In My Mind"));
+            music.add(new Music("All Time Low"));
+            music.add(new Music("Elastic Heart"));
+            music.add(new Music("Super Far"));
+            music.add(new Music("All The Time"));
+            music.add(new Music("Ain't It Fun"));
+            music.add(new Music("Whatever You Need (feat. Chris Brown & Ty Dolla $ign)"));
+            music.add(new Music("Crush"));
+            music.add(new Music("goosebumps"));
+            music.add(new Music("Please Don't Go"));
+            music.add(new Music("Applause"));
 
             Tracks tracks = new Tracks();
-            tracks.setTracksMusic(track);
+            tracks.setTracksMusic(music);
 
             return tracks;
         }

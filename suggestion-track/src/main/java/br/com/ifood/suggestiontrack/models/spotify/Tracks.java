@@ -9,6 +9,6 @@ import java.util.List;
 public class Tracks {
 
     @JsonProperty("tracks")
-    private List<Track> tracksMusic;
+    private List<Music> tracksMusic;
 
 }

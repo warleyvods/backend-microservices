@@ -1,3 +1,7 @@
 spring:
   application:
     name: suggestion-track
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true

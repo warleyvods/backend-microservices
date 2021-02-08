@@ -10,7 +10,7 @@ public class TrackNameMockCreator {
 
     public static TrackName createTrackNameResponse() {
         TrackName trackName = new TrackName();
-        trackName.setName(new ArrayList<>());
+        trackName.setMusicNames(new ArrayList<>());
         trackName.setCity("Goiania");
         trackName.setTemperature(25F);
         trackName.setGenre(GenreMusic.POP);

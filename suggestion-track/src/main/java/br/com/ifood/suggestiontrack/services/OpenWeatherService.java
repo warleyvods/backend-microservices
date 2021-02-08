@@ -25,7 +25,7 @@ public class OpenWeatherService {
      * @param city that is researched the temperature.
      * @return city temperature in a float Celsius.
      */
-//    @Cacheable("temperatureByCity")
+    @Cacheable("temperatureByCity")
     public OpenWeather getTemperatureByCity(String city) {
         return openWeatherClient.getOpenWeather(city, openWeatherConfig.getAppId(), openWeatherConfig.getUnits());
     }
@@ -37,7 +37,7 @@ public class OpenWeatherService {
      * @param lon logitude for the search.
      * @return temperature of coordinates in a float number Celsius.
      */
-//    @Cacheable("temperatureByCoordinates")
+    @Cacheable("temperatureByCoordinates")
     public OpenWeather getTemperatureByGeographicCoordinates(Double lat, Double lon) {
         return openWeatherClient.getOpenWeatherByCoordinates(lon, lat, openWeatherConfig.getAppId(), openWeatherConfig.getUnits());
     }

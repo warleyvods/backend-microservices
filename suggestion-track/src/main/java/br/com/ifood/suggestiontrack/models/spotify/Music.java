@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Track {
+public class Music {
 
     @JsonProperty("name")
     private String name;

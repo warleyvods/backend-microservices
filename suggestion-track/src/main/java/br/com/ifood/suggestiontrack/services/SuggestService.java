@@ -4,7 +4,7 @@ import br.com.ifood.suggestiontrack.enums.GenreMusic;
 import br.com.ifood.suggestiontrack.error.CityNotFoundException;
 import br.com.ifood.suggestiontrack.error.CoordinateWrongException;
 import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
-import br.com.ifood.suggestiontrack.models.spotify.Track;
+import br.com.ifood.suggestiontrack.models.spotify.Music;
 import br.com.ifood.suggestiontrack.models.spotify.Tracks;
 import br.com.ifood.suggestiontrack.models.spotify.mapper.TrackName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,20 +53,22 @@ public class SuggestService {
     private void trackNameResponse(TrackName trackName, Float temperature, GenreMusic genreMusic, Tracks tracks) {
         List<String> namesMusic = new ArrayList<>();
 
-        for (Track track : tracks.getTracksMusic()) {
-            namesMusic.add(track.getName());
+        for (Music music : tracks.getTracksMusic()) {
+            namesMusic.add(music.getName());
         }
 
         trackName.setTemperature(temperature);
         trackName.setGenre(genreMusic);
-        trackName.setName(namesMusic);
+        trackName.setMusicNames(namesMusic);
     }
 
     /**
+     * This method call OpenWeather API and Spotify API to
+     * get the temperature and music suggestion data based on the coordinates.
      *
      * @param latitude latitude min -90 max +90 degrees
      * @param longitude longitude min -180 max +180 degrees
-     * @return
+     * @return object TrackName
      * @throws CoordinateWrongException if range are invalid.
      */
     public TrackName suggestMusicByCoordinates(double latitude, double longitude) {
