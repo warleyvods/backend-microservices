@@ -1,6 +1,5 @@
 package br.com.ifood.suggestiontrack.models.spotify.mapper;
 
-import br.com.ifood.suggestiontrack.enums.GenreMusic;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -16,7 +15,7 @@ public class TrackName {
     private Float temperature;
 
     @Schema(description = "Genre music based on temperature", example = "pop")
-    private GenreMusic genre;
+    private String genre;
 
     @Schema(description = "List with 20 music names based on genre music",
             example = "Nigo in Beverly Hills - Well Done Fever...")

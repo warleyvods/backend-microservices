@@ -30,10 +30,10 @@ public class SpotifyService {
      * @param genre genre described based on temperature.
      * @return object tracks filled.
      */
-    public Tracks suggerMusicForGenre(GenreMusic genre) {
+    public Tracks suggerMusicForGenre(String genre) {
         String oAuth = HttpConfig.BEARER_AUTH + getApiKeyFeign().getAccessToken();
 
-        return spotifyRecommendationClient.suggestMusicForGenre(genre.toString(), oAuth);
+        return spotifyRecommendationClient.suggestMusicForGenre(genre, oAuth);
     }
 
     /**
@@ -42,7 +42,7 @@ public class SpotifyService {
      * @param temperature temperature from the city
      * @return enum of genre music.
      */
-    public GenreMusic obtainMusicalGenre(float temperature) {
+    public String obtainMusicalGenre(float temperature) {
         GenreMusic genreMusic;
 
         if (temperature > 30.0) {
@@ -55,7 +55,7 @@ public class SpotifyService {
             genreMusic = GenreMusic.CLASSIC;
         }
 
-        return genreMusic;
+        return genreMusic.label;
     }
 
     private OauthTokenResponse getApiKeyFeign() {

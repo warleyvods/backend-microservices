@@ -1,6 +1,5 @@
 package br.com.ifood.suggestiontrack.services;
 
-import br.com.ifood.suggestiontrack.enums.GenreMusic;
 import br.com.ifood.suggestiontrack.error.CityNotFoundException;
 import br.com.ifood.suggestiontrack.error.CoordinateWrongException;
 import br.com.ifood.suggestiontrack.models.openweather.OpenWeather;
@@ -37,8 +36,8 @@ public class SuggestService {
 
         try {
             OpenWeather openWeatherResponse = openWeatherService.getTemperatureByCity(city);
-            GenreMusic genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
-            Tracks tracks = spotifyService.suggerMusicForGenre(spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp()));
+            String genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
+            Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
 
             trackNameResponse(trackName, openWeatherResponse.getMain().getTemp(), genreMusic, tracks);
             trackName.setCity(openWeatherResponse.getName());
@@ -50,7 +49,7 @@ public class SuggestService {
         return trackName;
     }
 
-    private void trackNameResponse(TrackName trackName, Float temperature, GenreMusic genreMusic, Tracks tracks) {
+    private void trackNameResponse(TrackName trackName, Float temperature, String genreMusic, Tracks tracks) {
         List<String> namesMusic = new ArrayList<>();
 
         for (Music music : tracks.getTracksMusic()) {
@@ -75,7 +74,7 @@ public class SuggestService {
         TrackName trackName = new TrackName();
         try {
             OpenWeather openWeatherResponse = openWeatherService.getTemperatureByGeographicCoordinates(latitude, longitude);
-            GenreMusic genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
+            String genreMusic = spotifyService.obtainMusicalGenre(openWeatherResponse.getMain().getTemp());
             Tracks tracks = spotifyService.suggerMusicForGenre(genreMusic);
 
             trackNameResponse(trackName, openWeatherResponse.getMain().getTemp(), genreMusic, tracks);
