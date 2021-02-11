@@ -40,7 +40,6 @@ public interface SpotifyRecommendationClient {
          */
         @Override
         public Tracks suggestMusicForGenre(String seedGenres, String oAuth) {
-
             ArrayList<Music> music = new ArrayList<>();
             music.add(new Music("Don't Let Me Down (feat. Daya)"));
             music.add(new Music("Havana (feat. Young Thug)"));
