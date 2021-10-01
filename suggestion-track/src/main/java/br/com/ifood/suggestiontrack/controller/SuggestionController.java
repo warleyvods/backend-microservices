@@ -39,7 +39,7 @@ public class SuggestionController {
             description = "City for the search the temperature and search a list music based on temperature.",
             tags = "Suggestion Track Search Controller"
     )
-    @GetMapping("/city")
+    @GetMapping("/search")
     public ResponseEntity<TrackName> getSuggestMusicsByTemperatureCity(@RequestParam String city) {
         TrackName trackName = suggestService.suggestMusicByTemperatureCity(city);
         return new ResponseEntity<>(trackName, HttpStatus.OK);
