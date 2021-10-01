@@ -13,3 +13,6 @@ eureka:
       defaultZone: '${EUREKA_ENV_NET:http://localhost:8081}/eureka'
     fetch-registry: true
     register-with-eureka: true
+
+ribbon:
+  ReadTimeout: 5000
